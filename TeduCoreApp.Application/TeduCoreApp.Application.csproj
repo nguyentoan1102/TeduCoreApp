@@ -5,10 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Implementations\" />
-    <Folder Include="AotoMapper\" />
-    <Folder Include="ViewModels\" />
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TeduCoreApp.Data\TeduCoreApp.Data.csproj" />
   </ItemGroup>
 
 </Project>

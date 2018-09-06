@@ -34,6 +34,6 @@ namespace TeduCoreApp.Data.Entities
 
         [ForeignKey("PositionId")]
         public virtual AdvertistmentPosition AdvertistmentPosition { get; set; }
-        public int SorOrder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public int SorOrder { get; set; }
     }
 }
