@@ -30,6 +30,6 @@ namespace TeduCoreApp.Application.ViewModels.Product
         public string SeoKeywords { set; get; }
         public string SeoDescription { set; get; }
 
-        public ICollection<ProductViewModel> Product { set; get; }
+        public ICollection<ProductViewModel> Products { set; get; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using TeduCoreApp.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using TeduCoreApp.Data.EF.Extensions;
@@ -11,6 +13,7 @@ using TeduCoreApp.Data.Interfaces;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+
 namespace TeduCoreApp.Data.EF
 {
     public class AppDbContext : IdentityDbContext<AppUser, AppRole, Guid>
@@ -70,7 +73,7 @@ namespace TeduCoreApp.Data.EF
                 .HasKey(x => new { x.RoleId, x.UserId });
 
             builder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens")
-.HasKey(x => new { x.UserId });
+               .HasKey(x => new { x.UserId });
 
             #endregion Identity Config
 
@@ -84,7 +87,7 @@ namespace TeduCoreApp.Data.EF
             builder.AddConfiguration(new SystemConfigConfiguration());
             builder.AddConfiguration(new AdvertistmentPositionConfiguration());
 
-            // base.OnModelCreating(builder);
+            //base.OnModelCreating(builder);
         }
 
         public override int SaveChanges()
@@ -121,4 +124,3 @@ namespace TeduCoreApp.Data.EF
         }
     }
 }
-

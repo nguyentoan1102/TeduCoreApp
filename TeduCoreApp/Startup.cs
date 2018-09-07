@@ -1,19 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TeduCoreApp.Data;
+using TeduCoreApp.Models;
+using TeduCoreApp.Services;
 using TeduCoreApp.Data.EF;
 using TeduCoreApp.Data.Entities;
 using AutoMapper;
 using TeduCoreApp.Application.Interfaces;
 using TeduCoreApp.Data.EF.Repositories;
 using TeduCoreApp.Data.IRepositories;
-using Microsoft.AspNetCore.Http;
-using TeduCoreApp.Application.Implementations;
-using Microsoft.AspNetCore.Mvc;
+using TeduCoreApp.Application.Implementation;
 
 namespace TeduCoreApp
 {
@@ -29,16 +33,9 @@ namespace TeduCoreApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddDbContext<AppDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
-               o => o.MigrationsAssembly("TeduCoreApp.Data.EF")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                o=>o.MigrationsAssembly("TeduCoreApp.Data.EF")));
 
             services.AddIdentity<AppUser, AppRole>()
                 .AddEntityFrameworkStores<AppDbContext>()
@@ -70,15 +67,15 @@ namespace TeduCoreApp
             services.AddSingleton(Mapper.Configuration);
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<AutoMapper.IConfigurationProvider>(), sp.GetService));
 
-            // services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddTransient<DbInitializer>();
 
-            services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
+            services.AddTransient<IProductCategoryRepository,ProductCategoryRepository>();
 
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,17 +84,15 @@ namespace TeduCoreApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
 
             app.UseAuthentication();
 
@@ -106,10 +101,11 @@ namespace TeduCoreApp
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(
-                    name: "areaRoute",
+
+                routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
             });
+          
         }
     }
 }

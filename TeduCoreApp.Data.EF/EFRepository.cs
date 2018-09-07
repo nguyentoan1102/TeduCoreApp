@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using TeduCoreApp.Infrastructure.Interfaces;
 using TeduCoreApp.Infrastructure.SharedKernel;
 
@@ -23,7 +24,7 @@ namespace TeduCoreApp.Data.EF
 
         public void Dispose()
         {
-            if (_context != null)
+          if(_context != null)
             {
                 _context.Dispose();
             }

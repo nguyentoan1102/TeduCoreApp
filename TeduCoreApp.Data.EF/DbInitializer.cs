@@ -56,7 +56,7 @@ namespace TeduCoreApp.Data.EF
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     Status = Status.Active
-                }, "admin123");
+                }, "123654$");
                 var user = await _userManager.FindByNameAsync("admin");
                 await _userManager.AddToRoleAsync(user, "Admin");
             }
@@ -134,6 +134,7 @@ namespace TeduCoreApp.Data.EF
                 _context.AdvertistmentPages.AddRange(pages);
             }
 
+
             if (_context.Slides.Count() == 0)
             {
                 List<Slide> slides = new List<Slide>()
@@ -156,6 +157,7 @@ namespace TeduCoreApp.Data.EF
                 };
                 _context.Slides.AddRange(slides);
             }
+
 
             if (_context.Sizes.Count() == 0)
             {

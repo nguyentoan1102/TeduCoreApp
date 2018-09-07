@@ -10,7 +10,7 @@ using TeduCoreApp.Infrastructure.SharedKernel;
 namespace TeduCoreApp.Data.Entities
 {
     [Table("Announcements")]
-    public class Announcement : DomainEntity<string>, ISwitchable, IDateTracking
+    public class Announcement  : DomainEntity<string>,ISwitchable,IDateTracking
     {
         public Announcement()
         {
