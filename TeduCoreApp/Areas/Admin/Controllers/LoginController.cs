@@ -18,17 +18,19 @@ namespace TeduCoreApp.Areas.Admin.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger _logger;
+
         public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ILogger<LoginController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -45,13 +47,12 @@ namespace TeduCoreApp.Areas.Admin.Controllers
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    return new ObjectResult(new GenericResult(false, "Tài khoản đã bị khoá"));
+                    return new ObjectResult(new GenericResult(false, "ser account locked out"));
                 }
                 else
                 {
-                    return new ObjectResult(new GenericResult(false, "Đăng nhập sai"));
+                    return new ObjectResult(new GenericResult(false, "Login failed"));
                 }
-
             }
             return new ObjectResult(new GenericResult(false, model));
         }

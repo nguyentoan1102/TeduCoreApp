@@ -20,6 +20,7 @@ using TeduCoreApp.Data.IRepositories;
 using TeduCoreApp.Application.Implementation;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using TeduCoreApp.Helpers;
 
 namespace TeduCoreApp
 {
@@ -76,6 +77,7 @@ namespace TeduCoreApp
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
 
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, CustomClaimsPrincipalFactory>();
 
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
         }
@@ -106,9 +108,8 @@ namespace TeduCoreApp
                     template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(name: "areaRoute",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
             });
-
         }
     }
 }
