@@ -1,7 +1,7 @@
 ﻿var loginController = function () {
     this.initialize = function () {
         registerEvents();
-    }
+    };
     var registerEvents = function () {
         $('#frmLogin').validate({
             errorClass: 'red',
@@ -38,7 +38,8 @@
                 Password: pass
             },
             dataType: 'json',
-            url: '/admin/login/authen',
+            //url: '@Url.Action("login", "authen",new {Area="admin"})',
+            url: "admin/login/authen",
             success: function (res) {
                 if (res.Success) {
                     window.location.href = "/Admin/Home/Index";
@@ -46,7 +47,8 @@
                 else {
                     tedu.notify('Login failed', 'error');
                 }
-            }
+            },
+            error: function () { console.log("Error") }
         });
     }
 }

@@ -8,9 +8,7 @@ using TeduCoreApp.Extensions;
 
 namespace TeduCoreApp.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {

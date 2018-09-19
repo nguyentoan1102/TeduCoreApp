@@ -30,4 +30,8 @@
     <ProjectReference Include="..\TeduCoreApp.Utilities\TeduCoreApp.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\NewFolder\" />
+  </ItemGroup>
+
 </Project>

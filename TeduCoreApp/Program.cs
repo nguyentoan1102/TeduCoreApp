@@ -16,8 +16,8 @@ namespace TeduCoreApp
     {
         public static void Main(string[] args)
         {
-            var host =  BuildWebHost(args);
-            using(var scope = host.Services.CreateScope())
+            var host = BuildWebHost(args);
+            using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
 
