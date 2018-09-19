@@ -10,10 +10,12 @@ namespace TeduCoreApp.Areas.Admin.Controllers
     public class ProductController : BaseController
     {
         private readonly IProductService _productService;
+        private readonly IProductCategoryService _productCategoryService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IProductCategoryService productCategoryService)
         {
             _productService = productService;
+            _productCategoryService = productCategoryService;
         }
 
         public IActionResult Index()
@@ -22,6 +24,13 @@ namespace TeduCoreApp.Areas.Admin.Controllers
         }
 
         #region AJAX API
+
+        [HttpGet]
+        public IActionResult GetAllCategories()
+        {
+            var model = _productCategoryService.GetAll();
+            return new OkObjectResult(model);
+        }
 
         [HttpGet]
         public IActionResult GetAll()
