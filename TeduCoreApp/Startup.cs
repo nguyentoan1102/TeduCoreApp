@@ -84,7 +84,9 @@ namespace TeduCoreApp
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
             services.AddTransient<IFunctionRepository, FunctionRepository>();
-            services.AddTransient<IProductReponsitory, ProductReponsitory>();
+            services.AddTransient<IProductRepository, ProductReponsitory>();
+            services.AddTransient<ITagRepository, TagRepository>();
+            services.AddTransient<IProductTagRepository, ProductTagRepository>();
             //Serrvices
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IFunctionService, FunctionService>();

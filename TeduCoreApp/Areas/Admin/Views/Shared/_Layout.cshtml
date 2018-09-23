@@ -17,8 +17,11 @@
     <!-- bootstrap-daterangepicker -->
     <link href="~/lib/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <link href="~/lib/notifyjs/dist/styles/metro/notify-metro.css" rel="stylesheet" />
+    <link href="~/lib/ckeditor/skins/moono/editor.css" rel="stylesheet" />
     <!-- Custom Theme Style -->
     <link href="~/admin-side/css/custom.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/lib/jQuery-EasyUI/themes/icon.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 </head>
 <body class="nav-md">
@@ -199,6 +202,10 @@
     <script src="~/lib/mustache/mustache.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="~/admin-side/js/custom.js"></script>
+    <script src="~/lib/jQuery-EasyUI/jquery.easyui.min.js"></script>
+    <script src="~/app/controllers/product-category/index.js" asp-append-version="true"></script>
+
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

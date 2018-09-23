@@ -6,7 +6,7 @@ using TeduCoreApp.Data.IRepositories;
 
 namespace TeduCoreApp.Data.EF.Repositories
 {
-    public class ProductReponsitory : EFRepository<Product, int>, IProductReponsitory
+    public class ProductReponsitory : EFRepository<Product, int>, IProductRepository
     {
         public ProductReponsitory(AppDbContext context) : base(context)
         {
