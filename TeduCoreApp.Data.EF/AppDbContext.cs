@@ -96,8 +96,7 @@ namespace TeduCoreApp.Data.EF
 
             foreach (EntityEntry item in modified)
             {
-                var changedOrAddedItem = item.Entity as IDateTracking;
-                if (changedOrAddedItem != null)
+                if (item.Entity is IDateTracking changedOrAddedItem)
                 {
                     if (item.State == EntityState.Added)
                     {

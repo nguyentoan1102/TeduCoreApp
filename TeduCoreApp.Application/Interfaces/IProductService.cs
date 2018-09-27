@@ -22,5 +22,7 @@ namespace TeduCoreApp.Application.Interfaces
         ProductViewModel GetById(int id);
 
         void Save();
+
+        void ImportExcel(string filePath, int categoryId);
     }
 }

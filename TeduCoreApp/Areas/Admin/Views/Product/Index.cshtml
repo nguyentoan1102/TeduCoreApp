@@ -1,8 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Index";
 }
+@section Styles {
+    <style>
+        .tooltip-arrow,
+        .red-tooltip + .tooltip > .tooltip-inner {
+            background-color: #1c1717 !important;
+        }
+    </style>
+
+}
 @section Scripts{
-    <script src="~/app/controllers/product/index.js"></script>
+    <script src="~/app/controllers/product/quantity-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/product/image-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/product/whole-price-management.js" asp-append-version="true"></script>
+    <script src="~/app/controllers/product/index.js" asp-append-version="true"></script>
+
     <script>
         var product = new productController();
         product.initialize();
@@ -14,7 +27,7 @@
     </div>
 
     <div class="title_right">
-        <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+        <div class="col-md-4 col-sm-3 col-xs-12 form-group pull-right">
 
             <div class="input-group">
                 <input type="text" id="txtKeyword" class="form-control" placeholder="Search for...">
@@ -29,51 +42,57 @@
             </select>
         </div>
 
-        <div class="col-md-2 col-sm-12  form-group pull-right">
+        <div class="col-md-4 col-sm-12  form-group pull-right">
+
             <button id="btnCreate" class="btn btn-success">Create</button>
+
+            <a class="btn btn-danger" href="~/templates/ProductImportTemplate.xlsx">Template</a>
+            <button class="btn btn-primary" id="btn-import" type="button" data-toggle="tooltip" data-placement="bottom" title="Import Excel"><i class="fa fa-file-excel-o"></i></button>
+            <button class="btn btn-default" id="btn-export" type="button"><i class="fa fa-forward"></i></button>
         </div>
     </div>
-</div>
 
-<div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_content">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th width="10%">#</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th>Created Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl-content"></tbody>
-                </table>
-                <!--Pagination-->
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
-                            <select id="ddlShowPage">
-                                <option value="10" selected="selected">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <span class="item-per-page">
-                                Records/Page.
-                            </span>
-                            Total Records: <strong id="lblTotalRecords"></strong>
-                        </div>
-                    </div><div class="col-sm-7">
-                        <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
-                            <ul id="paginationUL"></ul>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Created Date</th>
+                                <th>Status</th>
+                                <th width="15%">Selection</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-content"></tbody>
+                    </table>
+                    <!--Pagination-->
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">
+                                <select id="ddlShowPage">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span class="item-per-page">
+                                    Records/Page.
+                                </span>
+                                Total Records: <strong id="lblTotalRecords"></strong>
+                            </div>
+                        </div><div class="col-sm-7">
+                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-checkbox_paginate">
+                                <ul id="paginationUL"></ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,20 +102,24 @@
 </div>
 <script id="table-template" type="x-tmpl-mustache">
     <tr>
-        <th scope="row">
-            <button class="btn btn-default btn-sm btn-edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></button>
-            <button class="btn btn-danger btn-sm btn-delete" data-id="{{Id}}"><i class="fa fa-trash"></i></button>
-        </th>
+
         <td>{{Name}}</td>
         <td>{{CategoryName}}</td>
         <td>{{Price}}</td>
         <td>{{Image}}</td>
-        @*<td>
-
-                <img src="~/uploaded/images/20180923/VậtLy.PNG" />
-            </td>*@
         <td>{{CreatedDate}}</td>
         <td>{{{Status}}}</td>
+        <th scope="row">
+            <a href="#" class="btn btn-xs btn-sm btn-edit" data-toggle="tooltip" data-placement="bottom" title="Edit" data-id="{{Id}}"><i class="fa fa-pencil"></i></a>
+            <a href="#" class="btn btn-xs btn-sm btn-delete" data-toggle="tooltip" data-placement="bottom" title="Delete" data-id="{{Id}}"><i class="fa fa-trash"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-images" data-toggle="tooltip" data-placement="bottom" title="Images"><i class="fa fa-image"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-quantity" data-toggle="tooltip" data-placement="bottom" title="Quantity"><i class="fa fa-hourglass-start"></i></a>
+            <a href="#" data-id="{{Id}}" class="btn btn-xs btn-whole-price" data-toggle="tooltip" data-placement="bottom" title="Price"><i class="fa fa-money"></i></a>
+        </th>
     </tr>
 </script>
 @Html.Partial("_AddEditModal.cshtml");
+@Html.Partial("_ImportExcelModal.cshtml");
+@Html.Partial("_QuantityManagement.cshtml");
+@Html.Partial("_ImageManagement.cshtml");
+@Html.Partial("_WholePriceManagement.cshtml")

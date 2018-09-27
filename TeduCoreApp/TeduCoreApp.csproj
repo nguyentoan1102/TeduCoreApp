@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\NewFolder\" />
+    <Folder Include="wwwroot\uploaded\excels\" />
   </ItemGroup>
 
   <ItemGroup>

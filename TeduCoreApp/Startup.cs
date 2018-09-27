@@ -22,6 +22,8 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
 using TeduCoreApp.Helpers;
 using TeduCoreApp.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using TeduCoreApp.Authorization;
 
 namespace TeduCoreApp
 {
@@ -87,10 +89,25 @@ namespace TeduCoreApp
             services.AddTransient<IProductRepository, ProductReponsitory>();
             services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IProductTagRepository, ProductTagRepository>();
+            services.AddTransient<IPermisionRepository, PermissionRepository>();
+            services.AddTransient<IBillRepository, BillRepository>();
+            services.AddTransient<IBillDetailRepository, BillDetailRepository>();
+            services.AddTransient<IColorRepository, ColorRepository>();
+            services.AddTransient<ISizeRepository, SizeRepository>();
+            services.AddTransient<IProductQuatityReponsitory, ProductQuantityReponsitory>();
+            services.AddTransient<IProductImagesRepository, ProductImageRepository>();
+            services.AddTransient<IWolePriceRepository, WolePriceRepository>();
             //Serrvices
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IFunctionService, FunctionService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IBillService, BillService>();
+            services.AddTransient<IProductQuantityService, ProductQuantityService>();
+            services.AddTransient<IProductImageService, ProductService>();
+            services.AddTransient<IWolePriceService, ProductService>();
+            services.AddTransient<IAuthorizationHandler, BaseResourceAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

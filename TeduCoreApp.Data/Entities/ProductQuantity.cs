@@ -9,13 +9,22 @@ namespace TeduCoreApp.Data.Entities
     [Table("ProductQuantities")]
     public class ProductQuantity : DomainEntity<int>
     {
- 
+        public ProductQuantity()
+        {
+        }
+
+        public ProductQuantity(int productId, int sizeId, int colorId)
+        {
+            ProductId = productId;
+            SizeId = sizeId;
+            ColorId = colorId;
+        }
+
         [Column(Order = 1)]
         public int ProductId { get; set; }
 
         [Column(Order = 2)]
         public int SizeId { get; set; }
-
 
         [Column(Order = 3)]
         public int ColorId { get; set; }
