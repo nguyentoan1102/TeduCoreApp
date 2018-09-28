@@ -379,7 +379,7 @@
                         });
                     });
                     $('#lblTotalRecords').text(response.RowCount);
-                    if (render !== '') {
+                    if (render != '') {
                         $('#tbl-content').html(render);
                     }
                     wrapPaging(response.RowCount, function () {

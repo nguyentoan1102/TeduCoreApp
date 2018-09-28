@@ -132,8 +132,8 @@ namespace TeduCoreApp
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
+                     name: "default",
+                     template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(name: "areaRoute",
                     template: "{area:exists}/{controller=Login}/{action=Index}/{id?}");
